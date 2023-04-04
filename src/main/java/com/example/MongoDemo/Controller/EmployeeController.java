@@ -6,9 +6,7 @@ import com.example.MongoDemo.Services.IEmployeeServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/Employee/v1")
@@ -27,5 +25,18 @@ public class EmployeeController {
         }catch (EmployeeAlreadyExistException exception){
             throw exception;
         }
+    }
+
+    @GetMapping("/getEmps")
+    public ResponseEntity getEmployees(){
+        return new ResponseEntity(iEmployeeServices.getEmployees(), HttpStatus.OK);
+    }
+    @PostMapping ("/deleteEmp/{aa}")
+    public ResponseEntity deleteData(@PathVariable int aa){
+        return new ResponseEntity(iEmployeeServices.deleteEmp(aa), HttpStatus.OK);
+    }
+    @GetMapping("/getEmpDept/{dept}")
+    public ResponseEntity empByDept(@PathVariable String dept){
+        return new ResponseEntity(iEmployeeServices.getEmpByDepartment(dept), HttpStatus.OK);
     }
 }
