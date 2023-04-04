@@ -38,10 +38,10 @@ public class EmployeeServices implements IEmployeeServices{
     public Employee getEmpById(int id) throws EmployeeNotFoundExceptoin{
 
         if(employeeRepository.findById(id).isEmpty()){
-            return employeeRepository.findById(id).get();
+            throw new EmployeeNotFoundExceptoin();
 
         }else{
-            throw new EmployeeNotFoundExceptoin();
+            return employeeRepository.findById(id).get();
         }
 
     }
@@ -57,7 +57,8 @@ public class EmployeeServices implements IEmployeeServices{
 
     @Override
     public boolean deleteEmp(int id) {
-        return false;
+        employeeRepository.deleteById(id);
+        return true;
     }
 
     @Override

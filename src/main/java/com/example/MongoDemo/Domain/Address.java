@@ -11,6 +11,6 @@ import lombok.ToString;
 @Data
 public class Address {
     private int doorNo;
-    private String name;
+    private String street;
     private String city;
 }

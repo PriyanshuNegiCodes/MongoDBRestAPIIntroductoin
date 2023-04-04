@@ -13,6 +13,6 @@ public interface EmployeeRepository extends MongoRepository<Employee, Integer> {
 //    @Query("{'address.city':{$in:[?0, ?1]}")
 //    List<Employee> getEmployeeByCity(String city0, String city1);
 
-    @Query("{'address.city':{$in:[?0]}")
+    @Query("{'address.city':{$in:[?0]}}")
     List<Employee> getEmployeeByCity(String city);
 }

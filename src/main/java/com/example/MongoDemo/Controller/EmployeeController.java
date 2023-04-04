@@ -19,28 +19,31 @@ public class EmployeeController {
     }
 
     @PostMapping("/addEmp")
-    public ResponseEntity addEmployee(Employee employee) throws EmployeeAlreadyExistException {
+    public ResponseEntity<?> addEmployee(@RequestBody Employee employee) throws EmployeeAlreadyExistException {
         try{
-            return new ResponseEntity(iEmployeeServices.addEmployee(employee), HttpStatus.CREATED);
+            return new ResponseEntity<>(iEmployeeServices.addEmployee(employee), HttpStatus.CREATED);
         }catch (EmployeeAlreadyExistException exception){
             throw exception;
         }
     }
 
     @GetMapping("/getEmps")
-    public ResponseEntity getEmployees(){
-        return new ResponseEntity(iEmployeeServices.getEmployees(), HttpStatus.OK);
+    public ResponseEntity<?> getEmployees(){
+        return new ResponseEntity<>(iEmployeeServices.getEmployees(), HttpStatus.OK);
     }
-    @PostMapping ("/deleteEmp/{aa}")
-    public ResponseEntity deleteData(@PathVariable int aa){
-        return new ResponseEntity(iEmployeeServices.deleteEmp(aa), HttpStatus.OK);
+    @DeleteMapping ("/deleteEmp/{aa}")
+    public ResponseEntity<?> deleteData(@PathVariable int aa){
+        return new ResponseEntity<>(iEmployeeServices.deleteEmp(aa), HttpStatus.OK);
     }
-    @GetMapping("/getEmpDept/{dept}")
-    public ResponseEntity empByDept(@PathVariable String dept){
-        return new ResponseEntity(iEmployeeServices.getEmpByDepartment(dept), HttpStatus.OK);
+    // http://localhost:63300/api/Employee/v1/deleteEmp/{id} [delete] pathvariable
+
+ //    http://localhost:63300/api/Employee/v1/getEmpByDept/{department}  [get] pathvariable
+ @GetMapping("/getEmpByDept/{dept}")
+    public ResponseEntity<?> empByDept(@PathVariable String dept){
+        return new ResponseEntity<>(iEmployeeServices.getEmpByDepartment(dept), HttpStatus.OK);
     }
     @GetMapping("/getEmpCity/{city}")
-    public ResponseEntity empbyCity(@PathVariable String city){
-        return new ResponseEntity( iEmployeeServices.getEmpCity(city), HttpStatus.OK);
+    public ResponseEntity<?> empbyCity(@PathVariable String city){
+        return new ResponseEntity<>( iEmployeeServices.getEmpCity(city), HttpStatus.OK);
     }
 }

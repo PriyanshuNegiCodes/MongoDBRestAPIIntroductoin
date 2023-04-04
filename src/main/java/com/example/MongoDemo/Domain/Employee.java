@@ -7,13 +7,14 @@ import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @ToString
+@Document
 public class Employee {
-    @Id //this will override the Id field that the mongo creates
+    @Id //this will override the id field that the mongo creates
     private int empId;
     private String firstName;
     private String lastName;
